@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lissette Ivonne | Creative Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --red: #e10613;
+        --cream: #f4efe4;
+        --ink: #3b0710;
+        --split: 47%;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--red);
+        color: var(--cream);
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .poster {
+        position: relative;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow: hidden;
+        background: var(--red);
+      }
+
+      .corner {
+        position: absolute;
+        z-index: 5;
+        margin: 0;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .corner-tl {
+        top: 4.5vh;
+        left: 3.5vw;
+      }
+
+      .corner-tr {
+        top: 4.5vh;
+        right: 3.5vw;
+      }
+
+      .corner-bl {
+        bottom: 4.5vh;
+        left: 3.5vw;
+      }
+
+      .sigil {
+        position: absolute;
+        z-index: 5;
+        right: 3.2vw;
+        bottom: 4vh;
+        display: flex;
+        align-items: flex-end;
+        gap: 0.7rem;
+      }
+
+      .mono {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        line-height: 0.78;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(2.4rem, 4vw, 3.6rem);
+        letter-spacing: 0.02em;
+      }
+
+      .mono span:first-child {
+        border-bottom: 1.5px solid var(--cream);
+        padding-bottom: 0.08em;
+        margin-bottom: 0.06em;
+      }
+
+      .sigil-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding-bottom: 0.15rem;
+      }
+
+      .tiny {
+        font-size: 0.48rem;
+        letter-spacing: 0.22em;
+        font-weight: 500;
+      }
+
+      .role {
+        font-size: 0.72rem;
+        letter-spacing: 0.34em;
+        font-weight: 600;
+      }
+
+      .hero-type {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      .fill,
+      .stroke {
+        position: absolute;
+        left: 3vw;
+        top: 50%;
+        transform: translateY(-52%);
+        margin: 0;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(4.6rem, 14.6vw, 13.5rem);
+        font-weight: 400;
+        line-height: 0.78;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+      }
+
+      .fill {
+        z-index: 1;
+        color: var(--cream);
+        clip-path: inset(0 calc(100% - var(--split)) 0 0);
+      }
+
+      .stroke {
+        z-index: 4;
+        color: transparent;
+        -webkit-text-stroke: 0.14vw var(--cream);
+        clip-path: inset(0 0 0 var(--split));
+        pointer-events: none;
+      }
+
+      .portrait {
+        position: absolute;
+        z-index: 2;
+        right: -2vw;
+        bottom: 0;
+        height: 100vh;
+        height: 100dvh;
+        width: auto;
+        max-width: none;
+        object-fit: cover;
+        object-position: 64% 12%;
+        mix-blend-mode: multiply;
+        filter: contrast(2.05) brightness(1.12);
+        mask-image: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(0, 0, 0, 0.2) 12%,
+          rgba(0, 0, 0, 0.7) 28%,
+          #000 48%,
+          #000 90%,
+          transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(0, 0, 0, 0.2) 12%,
+          rgba(0, 0, 0, 0.7) 28%,
+          #000 48%,
+          #000 90%,
+          transparent 100%
+        );
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .band {
+        position: relative;
+        padding: 7vh 6vw 8vh;
+        border-top: 1px solid rgba(244, 239, 228, 0.28);
+      }
+
+      .kicker {
+        margin: 0 0 1.2rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      .lead {
+        margin: 0;
+        max-width: 18ch;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(2.2rem, 5vw, 4.4rem);
+        font-weight: 400;
+        line-height: 0.92;
+        letter-spacing: 0.01em;
+      }
+
+      .cols {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.5rem;
+        margin-top: 4.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(244, 239, 228, 0.28);
+      }
+
+      .cols article span {
+        display: block;
+        margin-bottom: 0.8rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.24em;
+      }
+
+      .cols h2 {
+        margin: 0 0 0.7rem;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 400;
+        letter-spacing: 0.03em;
+      }
+
+      .cols p {
+        margin: 0;
+        max-width: 28ch;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        font-weight: 400;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 3rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3rem;
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        font-family: inherit;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .btn-fill {
+        background: var(--cream);
+        color: var(--red);
+        border: 1.5px solid var(--cream);
+      }
+
+      .btn-line {
+        background: transparent;
+        color: var(--cream);
+        border: 1.5px solid var(--cream);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .site-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.4rem 6vw 2rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        border-top: 1px solid rgba(244, 239, 228, 0.28);
+      }
+
+      #video-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+      }
+
+      #video-modal.open {
+        display: flex;
+      }
+
+      .backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.78);
+      }
+
+      .dialog {
+        position: relative;
+        width: min(960px, 100%);
+      }
+
+      .close-video {
+        position: absolute;
+        top: -2.4rem;
+        right: 0;
+        background: none;
+        border: 0;
+        color: var(--cream);
+        font: inherit;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .frame {
+        aspect-ratio: 16 / 9;
+        background: #000;
+        border: 1px solid rgba(244, 239, 228, 0.35);
+      }
+
+      .frame iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      @media (max-width: 800px) {
+        :root {
+          --split: 54%;
+        }
+
+        .corner,
+        .sigil {
+          letter-spacing: 0.16em;
+        }
+
+        .corner-tr,
+        .sigil {
+          display: none;
+        }
+
+        .fill,
+        .stroke {
+          font-size: 17vw;
+          top: 22%;
+          transform: none;
+        }
+
+        .portrait {
+          height: 68vh;
+          right: -8vw;
+          object-position: 70% 10%;
+        }
+
+        .stroke {
+          display: none;
+        }
+
+        .fill {
+          clip-path: none;
+          top: 13%;
+          font-size: 16vw;
+        }
+
+        .portrait {
+          height: 62vh;
+          right: -18vw;
+          filter: contrast(1.45) brightness(1.05);
+        }
+
+        .cols {
+          grid-template-columns: 1fr;
+          gap: 1.8rem;
+        }
+
+        .lead {
+          max-width: 14ch;
+        }
+
+        .site-footer {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="poster" aria-label="Portada">
+      <p class="corner corner-tl">Portfolio</p>
+      <p class="corner corner-tr">Lissette Ivonne</p>
+      <p class="corner corner-bl">2026-2027</p>
+
+      <div class="sigil">
+        <div class="mono" aria-hidden="true">
+          <span>L</span>
+          <span>I</span>
+        </div>
+        <div class="sigil-copy">
+          <span class="tiny">Lissette Ivonne</span>
+          <span class="role">Artista</span>
+        </div>
+      </div>
+
+      <div class="hero-type">
+        <h1 class="fill">CREATIVE<br />PORTFOLIO</h1>
+        <div class="stroke" aria-hidden="true">CREATIVE<br />PORTFOLIO</div>
+      </div>
+
+      <img
+        class="portrait"
+        src="./img/perfil/FOTO%20LISSETTE%20IVONNE%20(3).jpeg"
+        alt="Lissette Ivonne"
+      />
+    </section>
+
+    <section class="band">
+      <p class="kicker">Actriz &amp; profesora de danza</p>
+      <p class="lead">Creación actoral centrada en el cuerpo.</p>
+      <div class="cols">
+        <article>
+          <span>01</span>
+          <h2>DANZA</h2>
+          <p>Bachata sensual, salsa cubana y danza moderna. Clases, workshops y coreografías.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h2>ESCENA</h2>
+          <p>Teatro y televisión. Formación dramática, trabajo de cámara y de tablas.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h2>FICHA</h2>
+          <p>26 años · 1,68 m · España. Español, inglés y francés.</p>
+        </article>
+      </div>
+      <div class="actions">
+        <a class="btn btn-fill" href="./index.html">Volver al sitio</a>
+        <button class="btn btn-line" type="button" onclick="openVideo()">
+          Ver videobook
+        </button>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>© 2026 Lissette Ivonne</span>
+      <span>Prueba de estilo</span>
+    </footer>
+
+    <div id="video-modal" role="dialog" aria-modal="true" aria-label="Videobook">
+      <div class="backdrop" onclick="closeVideo()"></div>
+      <div class="dialog">
+        <button class="close-video" type="button" onclick="closeVideo()">
+          Cerrar
+        </button>
+        <div class="frame">
+          <iframe
+            id="video-frame"
+            title="Videobook de Lissette Ivonne"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const VIDEO_SRC =
+        "https://www.youtube.com/embed/YIZGvzxrJ1w?autoplay=1&si=wx9N0diu6GGeFmFx";
+
+      function openVideo() {
+        const modal = document.getElementById("video-modal");
+        const frame = document.getElementById("video-frame");
+        frame.src = VIDEO_SRC;
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeVideo() {
+        const modal = document.getElementById("video-modal");
+        const frame = document.getElementById("video-frame");
+        frame.src = "";
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeVideo();
+      });
+    </script>
+  </body>
+</html>

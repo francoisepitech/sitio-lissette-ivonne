@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="es" class="overflow-x-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Lissette Ivonne | Actriz & Profesora de Danza</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      /* Conteneur principal avec Scroll Snap */
+      .snap-container {
+        height: 100vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+      }
+
+      /* Sections verrouillées en plein écran */
+      .snap-section {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        min-height: 100vh;
+        height: 100vh;
+      }
+
+      * {
+        transition:
+          background-color 0.4s ease,
+          border-color 0.4s ease,
+          color 0.3s ease,
+          box-shadow 0.4s ease,
+          transform 0.3s ease;
+      }
+
+      body {
+        background: #0d0305;
+        color: #fff1f2;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .font-heading {
+        font-family: "Times New Roman", serif;
+        letter-spacing: 1px;
+      }
+
+      .font-card {
+        font-family: "Cormorant Garamond", serif;
+        letter-spacing: 0.5px;
+      }
+
+      .accent-color {
+        color: #ef4444;
+      }
+
+      .card-box {
+        background: rgba(13, 3, 5, 0.85);
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        border-radius: 24px;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
+      }
+
+      .card-box:hover {
+        border-color: rgba(239, 68, 68, 0.8);
+        box-shadow: 0 12px 40px rgba(220, 38, 38, 0.3);
+      }
+
+      .btn-main {
+        background: #e60000;
+        color: #ffffff;
+        border-radius: 50px;
+        box-shadow: 0 4px 22px rgba(230, 0, 0, 0.6);
+        font-weight: 700;
+      }
+
+      .btn-main:hover {
+        transform: scale(1.04);
+        background: #ff1a1a;
+        box-shadow: 0 6px 30px rgba(255, 26, 26, 0.85);
+      }
+
+      .btn-sec {
+        background: rgba(13, 3, 5, 0.6);
+        border: 1.5px solid rgba(239, 68, 68, 0.6);
+        color: #ffffff;
+        border-radius: 50px;
+      }
+
+      .btn-sec:hover {
+        background: rgba(230, 0, 0, 0.35);
+        border-color: #ff1a1a;
+        box-shadow: 0 4px 20px rgba(230, 0, 0, 0.5);
+      }
+
+      .hero-tag {
+        background: rgba(220, 38, 38, 0.25);
+        border: 1px solid #dc2626;
+        color: #fca5a5;
+        padding: 6px 20px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .hero-portrait {
+        -webkit-mask-image: radial-gradient(
+          ellipse 78% 82% at 50% 46%,
+          #000 58%,
+          transparent 100%
+        );
+        mask-image: radial-gradient(
+          ellipse 78% 82% at 50% 46%,
+          #000 58%,
+          transparent 100%
+        );
+      }
+
+      .hero-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+      }
+
+      .hero-slide.is-active {
+        opacity: 1;
+      }
+
+      /* Navigation par points à gauche */
+      .dot-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(239, 68, 68, 0.5);
+        transition: all 0.3s ease;
+      }
+
+      .dot-indicator.active {
+        height: 28px;
+        border-radius: 12px;
+        background-color: #ef4444;
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
+      }
+
+      /* Indicateurs du carrousel de fond (horizontaux) */
+      .carousel-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(239, 68, 68, 0.5);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .carousel-dot.active {
+        width: 28px;
+        border-radius: 12px;
+        background-color: #ef4444;
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
+      }
+
+      /* Styles Carrousel Arrière-Plan Section Actuación (Plus clair et lumineux) */
+      .bg-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .bg-slide.is-active {
+        opacity: 0.4; /* Opacité augmentée pour plus de visibilité */
+        filter: brightness(1.25); /* Filtre pour éclaircir les images sombres */
+      }
+    </style>
+  </head>
+
+  <body class="bg-black text-white">
+    <!-- NAVIGATION PAR POINTS (À GAUCHE) -->
+    <nav class="fixed left-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
+      <a
+        href="#hero"
+        class="dot-indicator active"
+        data-section="hero"
+        title="Inicio"
+      ></a>
+      <a
+        href="#actuacion"
+        class="dot-indicator"
+        data-section="actuacion"
+        title="Actuación"
+      ></a>
+      <a
+        href="#danza"
+        class="dot-indicator"
+        data-section="danza"
+        title="Danza"
+      ></a>
+      <a
+        href="#ficha"
+        class="dot-indicator"
+        data-section="ficha"
+        title="Ficha Técnica"
+      ></a>
+    </nav>
+
+    <!-- CONTENEUR SCROLL SNAP -->
+    <main class="snap-container" id="main-container">
+      <!-- ================= SECTION 1 : HERO ================= -->
+      <section
+        id="hero"
+        class="snap-section flex flex-col justify-between px-6 sm:px-16 py-12 relative overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-20"
+        >
+          <img
+            src="./img/perfil/FOTO PRIMER PLANO- LISSETTE.jpeg"
+            class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110"
+            alt=""
+          />
+          <img
+            src="./img/perfil/FOTO PRIMER PLANO- LISSETTE.jpeg"
+            class="relative w-full h-full object-contain"
+            alt="Background Hero"
+          />
+        </div>
+
+        <div
+          class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full my-auto max-w-7xl mx-auto w-full"
+        >
+          <!-- Left Info -->
+          <div class="lg:col-span-7 flex flex-col items-start gap-6">
+            <span class="hero-tag inline-block">
+              Actriz & Profesora de Danza
+            </span>
+
+            <h1
+              class="font-heading text-5xl sm:text-7xl lg:text-8xl font-bold leading-none"
+            >
+              LISSETTE IVONNE
+            </h1>
+
+            <p
+              class="text-gray-300 text-base sm:text-xl font-light max-w-2xl leading-relaxed"
+            >
+              Amante de las artes escénicas. Desarrollo una línea de creación
+              actoral centrada en el cuerpo. Busco crear espacios de unión y
+              conexión entre todos.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap gap-4 pt-2 w-full sm:w-auto">
+              <button
+                type="button"
+                onclick="openVideo()"
+                class="btn-main px-8 py-4 flex items-center justify-center gap-3 text-sm"
+              >
+                <i class="fa-solid fa-play text-xs"></i> Ver Videobook / Reel
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Image Slider -->
+          <div
+            class="lg:col-span-5 w-full max-w-md mx-auto flex justify-center"
+          >
+            <div
+              class="hero-portrait relative w-full min-w-[350px] sm:min-w-[535px] max-w-full aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl"
+            >
+              <img
+                class="hero-slide is-active"
+                src="./img/perfil/FOTO PRIMER PLANO- LISSETTE.jpeg"
+                alt="Lissette Ivonne, primer plano"
+              />
+              <img
+                class="hero-slide"
+                src="./img/perfil/FOTO CUERPO ENTERO- LISSETTE.jpeg"
+                alt="Lissette Ivonne, cuerpo entero"
+              />
+              <img
+                class="hero-slide"
+                src="./img/perfil/FOTO LISSETTE IVONNE (3).jpeg"
+                alt="Lissette Ivonne"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 2 : UNIVERSO ACTUACIÓN (CARROUSEL EN FOND) ================= -->
+      <section
+        id="actuacion"
+        class="snap-section flex flex-col justify-center items-center px-6 sm:px-16 py-20 relative overflow-hidden"
+      >
+        <!-- CARROUSEL EN ARRIÈRE-PLAN -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src="./img/teatro/foto theatre 1.jpeg"
+            class="bg-slide is-active"
+            alt="Fond 1"
+          />
+          <img src="./img/teatro/foto theatre 2.jpeg" class="bg-slide" alt="Fond 2" />
+          <img src="./img/teatro/foto theatre 4.jpeg" class="bg-slide" alt="Fond 4" />
+          <img src="./img/teatro/foto theatre 5.jpeg" class="bg-slide" alt="Fond 5" />
+          <img
+            src="./img/teatro/foto theatre 9.jpeg"
+            class="bg-slide"
+            style="object-position: center top"
+            alt="Fond 9"
+          />
+          <img
+            src="./img/teatro/foto theatre 10.jpeg"
+            class="bg-slide"
+            style="object-position: center 35%"
+            alt="Fond 10"
+          />
+        </div>
+
+        <!-- CONTENU AU-DESSUS DU FOND (CENTRÉ) -->
+        <div class="relative z-10 max-w-6xl w-full mx-auto flex justify-center">
+          <div class="space-y-6 text-center max-w-2xl mx-auto">
+            <h2 class="font-heading text-4xl sm:text-7xl font-bold text-white">
+              Actuación & Teatro
+            </h2>
+            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+              Experiencia en producciones audiovisuales y artes escénicas.
+              Trabajo enfocado en la verdad orgánica del personaje, la presencia
+              corporal y la expresividad emocional.
+            </p>
+
+            <div class="pt-4 flex flex-wrap justify-center gap-4">
+              <button
+                onclick="openVideo()"
+                class="btn-main px-8 py-4 text-xs font-bold uppercase tracking-wider flex items-center gap-3"
+              >
+                <i class="fa-solid fa-play"></i> Reproducir Showreel
+              </button>
+              <a
+                href="./CV-ACTRIZ-LISSETTE-IVONNE-2026.pdf"
+                download="CV ACTRIZ LISSETTE IVONNE 2026.pdf"
+                class="btn-sec px-8 py-4 text-xs font-bold uppercase tracking-wider flex items-center gap-3"
+              >
+                <i class="fa-solid fa-file-arrow-down"></i> Descargar CV
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTRÔLES ET INDICATEURS DE POSITION (EN BAS) -->
+        <div
+          class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/10 shadow-xl"
+        >
+          <button
+            type="button"
+            id="actPrevBtn"
+            class="text-white/70 hover:text-red-500 transition-colors p-1"
+            aria-label="Anterior"
+          >
+            <i class="fa-solid fa-chevron-left text-sm"></i>
+          </button>
+
+          <!-- INDICATEURS DE POSITION DYNAMIQUES -->
+          <div id="carouselDots" class="flex items-center gap-2"></div>
+
+          <button
+            type="button"
+            id="actNextBtn"
+            class="text-white/70 hover:text-red-500 transition-colors p-1"
+            aria-label="Siguiente"
+          >
+            <i class="fa-solid fa-chevron-right text-sm"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 3 : UNIVERSO DANZA ================= -->
+      <section
+        id="danza"
+        class="snap-section flex flex-col justify-center items-center px-6 sm:px-16 py-20 relative overflow-hidden"
+      >
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          class="absolute inset-0 w-full h-full object-cover opacity-40 brightness-125 z-0 object-[center] pointer-events-none"
+        >
+          <source src="./img/videos/LATIN REEL BAILANDO.MOV" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div
+          class="relative z-10 max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+        >
+          <div class="lg:col-span-7 space-y-6">
+            <h2 class="font-heading text-4xl sm:text-7xl font-bold text-white">
+              Danza & Ritmos Latinos
+            </h2>
+            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+              Profesora apasionada de Bachata Sensual, Salsa Cubana y Lady
+              Styling. Transmito la técnica combinándola con musicalidad,
+              expresión corporal y conexión natural con la pareja.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="card-box p-4 flex items-start gap-3">
+                <i
+                  class="fa-solid fa-check-circle text-red-500 text-lg mt-0.5"
+                ></i>
+                <div>
+                  <h4 class="font-card font-bold text-lg text-white">
+                    Clases & Workshops
+                  </h4>
+                  <p class="text-xs text-gray-400">
+                    Formaciones colectivas e intensivos.
+                  </p>
+                </div>
+              </div>
+              <div class="card-box p-4 flex items-start gap-3">
+                <i
+                  class="fa-solid fa-check-circle text-red-500 text-lg mt-0.5"
+                ></i>
+                <div>
+                  <h4 class="font-card font-bold text-lg text-white">Coreografías</h4>
+                  <p class="text-xs text-gray-400">
+                    Montajes para shows y eventos.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 flex flex-wrap gap-4">
+              <a
+                href="./clases-danza.html"
+                class="btn-main px-8 py-4 text-xs font-bold uppercase tracking-wider flex items-center gap-3"
+              >
+                <i class="fa-solid fa-calendar-days"></i> Fotos & Reservar Clase
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 hidden lg:block">
+            <div class="card-box p-6 space-y-4">
+              <h3
+                class="font-card text-2xl font-bold italic text-white border-b border-white/10 pb-3"
+              >
+                Estilos Destacados
+              </h3>
+              <ul class="space-y-3 text-sm">
+                <li class="flex justify-between items-center text-gray-200">
+                  <span>Bachata Sensual / Fusion</span>
+                  <span
+                    class="text-xs bg-red-600/40 text-red-300 px-2.5 py-1 rounded-md"
+                    >Avanzado</span
+                  >
+                </li>
+                <li class="flex justify-between items-center text-gray-200">
+                  <span>Salsa Cubana / Casino</span>
+                  <span
+                    class="text-xs bg-red-600/40 text-red-300 px-2.5 py-1 rounded-md"
+                    >Pro</span
+                  >
+                </li>
+                <li class="flex justify-between items-center text-gray-200">
+                  <span>Lady Styling & Corporales</span>
+                  <span
+                    class="text-xs bg-red-600/40 text-red-300 px-2.5 py-1 rounded-md"
+                    >Especialista</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 4 : FICHA TÉCNICA ================= -->
+      <section
+        id="ficha"
+        class="snap-section flex flex-col justify-center items-center px-6 sm:px-16 py-20 relative overflow-hidden"
+      >
+        <img
+          src="./img/perfil/FOTO PRIMER PLANO- LISSETTE.jpeg"
+          class="absolute inset-0 w-full h-full object-cover opacity-20 z-0 pointer-events-none object-top"
+          alt="Background"
+        />
+
+        <div class="relative z-10 max-w-5xl w-full">
+          <div class="text-center mb-12">
+            <h2 class="font-heading text-4xl sm:text-6xl font-bold text-white">
+              Ficha Técnica & Casting
+            </h2>
+            <div class="w-16 h-1 bg-red-600 mx-auto mt-4 rounded-full"></div>
+          </div>
+
+          <div class="card-box p-8 sm:p-12 w-full">
+            <div
+              class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-white/10 pb-8 mb-8 text-center"
+            >
+              <div>
+                <span
+                  class="text-xs text-gray-400 uppercase tracking-wider block mb-1"
+                  >Edad</span
+                >
+                <span
+                  class="font-heading text-2xl sm:text-3xl font-bold text-white"
+                  >26 Años</span
+                >
+              </div>
+              <div>
+                <span
+                  class="text-xs text-gray-400 uppercase tracking-wider block mb-1"
+                  >Estatura</span
+                >
+                <span
+                  class="font-heading text-2xl sm:text-3xl font-bold text-white"
+                  >1.68 m</span
+                >
+              </div>
+              <div>
+                <span
+                  class="text-xs text-gray-400 uppercase tracking-wider block mb-1"
+                  >Residencia</span
+                >
+                <span
+                  class="font-heading text-2xl sm:text-3xl font-bold text-white"
+                  >España</span
+                >
+              </div>
+              <div>
+                <span
+                  class="text-xs text-gray-400 uppercase tracking-wider block mb-1"
+                  >Idiomas</span
+                >
+                <span
+                  class="font-heading text-xl sm:text-2xl font-bold text-white"
+                  >ES / EN / FR</span
+                >
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+              <div class="bg-black/60 p-4 rounded-xl border border-white/5">
+                <span
+                  class="text-xs text-red-400 font-bold uppercase block mb-1"
+                >
+                  <i class="fa-solid fa-eye mr-2"></i>Rasgos
+                </span>
+                <p class="text-gray-200">Ojos Marrones • Pelo Castaño</p>
+              </div>
+              <div class="bg-black/60 p-4 rounded-xl border border-white/5">
+                <span
+                  class="text-xs text-red-400 font-bold uppercase block mb-1"
+                >
+                  <i class="fa-solid fa-shoe-prints mr-2"></i>Danza
+                </span>
+                <p class="text-gray-200">Bachata, Salsa, Moderno</p>
+              </div>
+              <div class="bg-black/60 p-4 rounded-xl border border-white/5">
+                <span
+                  class="text-xs text-red-400 font-bold uppercase block mb-1"
+                >
+                  <i class="fa-solid fa-star mr-2"></i>Habilidades
+                </span>
+                <p class="text-gray-200">Canto, Equitación, Expresión</p>
+              </div>
+            </div>
+
+            <div
+              class="mt-8 pt-6 border-t border-white/10 flex flex-wrap justify-between items-center gap-4"
+            >
+              <span class="text-xs text-gray-400">
+                Disponible para producciones nacionales e internacionales.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal Video -->
+    <div
+      id="video-modal"
+      class="fixed inset-0 z-[80] hidden items-center justify-center p-4 sm:p-8"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Videobook"
+    >
+      <div class="absolute inset-0 bg-black/80" onclick="closeVideo()"></div>
+      <div class="relative w-full max-w-5xl">
+        <button
+          type="button"
+          onclick="closeVideo()"
+          class="absolute -top-12 right-0 text-white/80 hover:text-white text-sm font-semibold flex items-center gap-2"
+          aria-label="Cerrar vídeo"
+        >
+          Cerrar <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div
+          class="aspect-video w-full overflow-hidden rounded-3xl border border-red-500/40 bg-black shadow-2xl"
+        >
+          <iframe
+            id="video-frame"
+            class="h-full w-full"
+            title="Videobook de Lissette Ivonne"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+              web-share;
+            "
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS Modals, Sliders & Scroll Sync -->
+    <script>
+      const VIDEO_SRC =
+        "https://www.youtube.com/embed/YIZGvzxrJ1w?autoplay=1&si=wx9N0diu6GGeFmFx";
+
+      function openVideo() {
+        const modal = document.getElementById("video-modal");
+        const frame = document.getElementById("video-frame");
+        frame.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.src = VIDEO_SRC;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      function closeVideo() {
+        const modal = document.getElementById("video-modal");
+        const frame = document.getElementById("video-frame");
+        frame.src = "";
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeVideo();
+      });
+
+      // Hero image carousel
+      const heroSlides = document.querySelectorAll(".hero-slide");
+      let heroSlideIndex = 0;
+      setInterval(() => {
+        heroSlides[heroSlideIndex].classList.remove("is-active");
+        heroSlideIndex = (heroSlideIndex + 1) % heroSlides.length;
+        heroSlides[heroSlideIndex].classList.add("is-active");
+      }, 5000);
+
+      // Scroll Sync avec les indicateurs
+      const container = document.getElementById("main-container");
+      const sections = document.querySelectorAll(".snap-section");
+      const dots = document.querySelectorAll(".dot-indicator");
+
+      container.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (container.scrollTop >= sectionTop - container.clientHeight / 3) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        dots.forEach((dot) => {
+          dot.classList.remove("active");
+          if (dot.getAttribute("data-section") === current) {
+            dot.classList.add("active");
+          }
+        });
+      });
+
+      // Carrousel d'arrière-plan Section Actuación
+      const bgSlides = document.querySelectorAll(".bg-slide");
+      const actPrevBtn = document.getElementById("actPrevBtn");
+      const actNextBtn = document.getElementById("actNextBtn");
+      const carouselDotsContainer = document.getElementById("carouselDots");
+      let bgIndex = 0;
+      let bgTimer = null;
+
+      // Génération automatique des puces d'indication
+      bgSlides.forEach((_, idx) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = `carousel-dot ${idx === 0 ? "active" : ""}`;
+        dot.setAttribute("aria-label", `Ir a imagen ${idx + 1}`);
+        dot.addEventListener("click", () => {
+          updateBgCarousel(idx);
+          resetBgTimer();
+        });
+        carouselDotsContainer.appendChild(dot);
+      });
+
+      function updateBgCarousel(newIndex) {
+        bgSlides[bgIndex].classList.remove("is-active");
+        const carouselDots =
+          carouselDotsContainer.querySelectorAll(".carousel-dot");
+        if (carouselDots[bgIndex])
+          carouselDots[bgIndex].classList.remove("active");
+
+        bgIndex = (newIndex + bgSlides.length) % bgSlides.length;
+
+        bgSlides[bgIndex].classList.add("is-active");
+        if (carouselDots[bgIndex])
+          carouselDots[bgIndex].classList.add("active");
+      }
+
+      function resetBgTimer() {
+        clearInterval(bgTimer);
+        bgTimer = setInterval(() => {
+          updateBgCarousel(bgIndex + 1);
+        }, 6000);
+      }
+
+      actNextBtn.addEventListener("click", () => {
+        updateBgCarousel(bgIndex + 1);
+        resetBgTimer();
+      });
+
+      actPrevBtn.addEventListener("click", () => {
+        updateBgCarousel(bgIndex - 1);
+        resetBgTimer();
+      });
+
+      // Lancement du timer automatique
+      resetBgTimer();
+    </script>
+  </body>
+</html>

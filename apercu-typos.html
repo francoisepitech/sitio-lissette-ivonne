@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aperçu des typos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Bodoni+Moda:wght@700&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,700;1,700&family=DM+Serif+Display&family=Italiana&family=Marcellus&family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 40px 24px;
+        background: #0d0305;
+        color: #fff1f2;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      h1 {
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #ef4444;
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .sample {
+        max-width: 1100px;
+        margin: 0 auto 28px;
+        padding: 28px 32px;
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        border-radius: 24px;
+        background: rgba(13, 3, 5, 0.85);
+      }
+
+      .label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #fca5a5;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .titles {
+        margin-top: 12px;
+        font-size: clamp(2.2rem, 6vw, 4.5rem);
+        line-height: 1.15;
+        color: #fff;
+      }
+
+      .titles div + div {
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Aperçu des typos pour les titres</h1>
+    <div id="samples"></div>
+
+    <script>
+      const FONTS = [
+        ["Actuelle : Times New Roman", "'Times New Roman', serif", 700],
+        ["Playfair Display", "'Playfair Display', serif", 700],
+        ["Cinzel", "'Cinzel', serif", 700],
+        ["Marcellus", "'Marcellus', serif", 400],
+        ["Cormorant Garamond", "'Cormorant Garamond', serif", 700],
+        ["Cormorant Garamond italique", "'Cormorant Garamond', serif", 700, "italic"],
+        ["Bodoni Moda", "'Bodoni Moda', serif", 700],
+        ["Italiana", "'Italiana', serif", 400],
+        ["Abril Fatface", "'Abril Fatface', serif", 400],
+        ["DM Serif Display", "'DM Serif Display', serif", 400],
+        ["Anton", "'Anton', sans-serif", 400],
+      ];
+      const TITLES = [
+        "Actuación & Teatro",
+        "Danza & Ritmos Latinos",
+        "Ficha Técnica & Casting",
+      ];
+
+      const container = document.getElementById("samples");
+      FONTS.forEach(([name, family, weight, style = "normal"]) => {
+        const sample = document.createElement("section");
+        sample.className = "sample";
+
+        const label = document.createElement("div");
+        label.className = "label";
+        label.textContent = name;
+
+        const titles = document.createElement("div");
+        titles.className = "titles";
+        titles.style.fontFamily = family;
+        titles.style.fontWeight = weight;
+        titles.style.fontStyle = style;
+        TITLES.forEach((text) => {
+          const line = document.createElement("div");
+          line.textContent = text;
+          titles.appendChild(line);
+        });
+
+        sample.append(label, titles);
+        container.appendChild(sample);
+      });
+    </script>
+  </body>
+</html>
